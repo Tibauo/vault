@@ -1,0 +1,21 @@
+[Unit]
+Description=Daemon for Vault
+Requires=network-online.target
+After=network-online.target consul.service
+
+[Service]
+User=root
+Group=root
+ExecStart={{ vault_bin_dir }}/vault server $OPTIONS -config {{ vault_conf_dir }}/vault.hcl
+ExecReload=/bin/kill -SIGHUP $MAINPID
+ExecStop=/opt/vault/bin/vault operator step-down
+KillMode=process
+LimitMEMLOCK=infinity
+Restart=on-failure
+StartLimitInterval=20
+StartLimitBurst=5
+TimeoutStartSec=0
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

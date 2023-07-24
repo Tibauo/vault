@@ -1,0 +1,32 @@
+# Vault
+
+Install & initialize vault
+
+## Requirements
+
+```
+```
+
+## Var
+
+```
+vault_version: 1.12.2
+vault_os: linux
+vault_archi: amd64
+vault_zip: vault_{{ vault_version }}_{{ vault_os }}_{{ vault_archi }}.zip
+vault_url: https://releases.hashicorp.com/vault/{{ vault_version }}/{{ vault_zip }}
+
+vault_bin_dir: /bin
+vault_conf_dir: /etc/vault
+vault_data_dir: /opt/vault/data
+vault_listen: "{{ ansible_fqdn }}"
+```
+
+## Playbook
+
+```
+- name: Deploy vault
+  hosts: vault
+  roles:
+    - vault
+```
